@@ -1,6 +1,5 @@
 import {
   ArrowRight,
-  ArrowUpRight,
   Star,
   UtensilsCrossed,
   Beef,
@@ -62,8 +61,7 @@ export function Hero() {
             </h1>
 
             <p className="mt-6 max-w-xl text-sm leading-relaxed text-cream-100/70 sm:text-base">
-              Aprende a calcular tus macronutrientes con exactitud según tu meta. Domina la báscula en crudo vs.
-              cocido y automatiza MyFitnessPal sin restricciones insostenibles.
+              Aprende a preparar tu plato para aumentar o perder peso
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -73,13 +71,6 @@ export function Hero() {
               >
                 Asegurar mi cupo
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </a>
-              <a
-                href="#metodologia"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-4 text-sm font-semibold text-cream-50 transition-all hover:border-white/25 hover:bg-white/10"
-              >
-                Ver el temario
-                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
               </a>
             </div>
 
@@ -166,7 +157,7 @@ export function Hero() {
                   El objetivo de la clase
                 </p>
                 <p className="mt-2 text-lg font-extrabold leading-snug text-cream-50 sm:text-xl">
-                  Mirar tu plato y saber exactamente qué hay dentro.
+                  Saber que estoy comiendo exactamente para perder o aumentar de peso.
                 </p>
                 <div className="mt-4 flex flex-wrap gap-1.5">
                   {[

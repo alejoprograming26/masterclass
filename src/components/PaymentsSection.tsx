@@ -80,7 +80,7 @@ const PAYMENT_THEMES: Record<string, PaymentTheme> = {
 
 export function PaymentsSection() {
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
-  const [openPaymentId, setOpenPaymentId] = useState<string | null>('binance');
+  const [openPaymentId, setOpenPaymentId] = useState<string | null>(null);
 
   const handleCopy = (text: string, id: string) => {
     navigator.clipboard.writeText(text);
@@ -184,11 +184,10 @@ export function PaymentsSection() {
                                 e.stopPropagation();
                                 handleCopy(field.value, copyId);
                               }}
-                              className={`inline-flex shrink-0 items-center gap-1 rounded-lg px-2.5 py-1.5 text-[10px] font-extrabold transition-all ${
-                                isCopied
+                              className={`inline-flex shrink-0 items-center gap-1 rounded-lg px-2.5 py-1.5 text-[10px] font-extrabold transition-all ${isCopied
                                   ? 'bg-forest-900 text-lime-brand'
                                   : theme.copyBtn
-                              }`}
+                                }`}
                               title="Copiar dato"
                             >
                               {isCopied ? (
@@ -217,21 +216,6 @@ export function PaymentsSection() {
               </article>
             );
           })}
-        </div>
-
-        <div className="mt-6 flex max-w-3xl items-start gap-3.5 rounded-2xl border border-lime-soft bg-lime-mist p-5">
-          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-forest-900 text-lime-brand">
-            <Check className="h-4 w-4" aria-hidden="true" />
-          </span>
-          <div>
-            <h3 className="text-sm font-extrabold text-forest-950">
-              Garantiza tu cupo para el lunes 18 de enero de 2027
-            </h3>
-            <p className="mt-1 text-xs leading-relaxed text-forest-800/80">
-              Una vez realizado tu pago, completa el formulario con tu número de comprobante o TxID. Recibirás la
-              confirmación de ingreso al aula en vivo con los materiales de la sesión.
-            </p>
-          </div>
         </div>
       </div>
     </section>

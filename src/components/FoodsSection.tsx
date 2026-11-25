@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowUpRight, Star } from 'lucide-react';
+import { Star, ChevronDown } from 'lucide-react';
 import { Eyebrow } from './ui/Eyebrow';
 import { NUTRITION_CATEGORIES } from '../data/masterclass';
 import catProteinas from '../assets/cat-proteinas.jpg';
@@ -22,11 +22,16 @@ const CATEGORY_IMAGES: Record<string, { src: string; alt: string }> = {
 };
 
 export function FoodsSection() {
-  const [activeCategoryTab, setActiveCategoryTab] = useState<string>('proteinas');
+  const [activeCategoryTab, setActiveCategoryTab] = useState<string | null>(null);
 
-  const selectedCategory =
-    NUTRITION_CATEGORIES.find((c) => c.id === activeCategoryTab) || NUTRITION_CATEGORIES[0];
-  const selectedCategoryImage = CATEGORY_IMAGES[selectedCategory.id];
+  const handleToggle = (categoryId: string) => {
+    setActiveCategoryTab((prev) => (prev === categoryId ? null : categoryId));
+  };
+
+  const selectedCategory = activeCategoryTab
+    ? NUTRITION_CATEGORIES.find((c) => c.id === activeCategoryTab) || null
+    : null;
+  const selectedCategoryImage = selectedCategory ? CATEGORY_IMAGES[selectedCategory.id] : null;
 
   return (
     <section
@@ -54,152 +59,226 @@ export function FoodsSection() {
             className="inline-flex w-fit shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-forest-200 bg-white px-5 py-2.5 text-xs font-bold text-forest-800 transition-all hover:border-forest-700 hover:bg-forest-900 hover:text-lime-brand"
           >
             Ver metas
-            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
           </a>
         </div>
 
-        {/* Category cards */}
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
+        {/* CONTENEDOR: En móvil lista vertical con su detalle pegado debajo; en PC (md) grilla 3 columnas */}
+        <div className="mt-10 flex flex-col gap-4 md:grid md:grid-cols-3">
           {NUTRITION_CATEGORIES.map((cat) => {
             const CatIcon = cat.icon;
             const active = activeCategoryTab === cat.id;
+
             return (
-              <button
-                key={cat.id}
-                type="button"
-                onClick={() => setActiveCategoryTab(cat.id)}
-                aria-pressed={active}
-                className={`group relative flex flex-col overflow-hidden rounded-[1.75rem] border p-5 text-left transition-all sm:p-6 ${
-                  active
-                    ? 'border-forest-900 bg-forest-900 text-cream-50 shadow-card ring-2 ring-lime-brand/70'
-                    : 'border-cream-200 bg-white hover:-translate-y-0.5 hover:border-forest-300 hover:shadow-[0_24px_50px_-32px_rgba(8,36,20,0.45)]'
-                }`}
-              >
-                <div className="relative -mx-5 -mt-5 mb-4 h-36 overflow-hidden sm:-mx-6 sm:-mt-6">
-                  <img
-                    src={CATEGORY_IMAGES[cat.id].src}
-                    alt={CATEGORY_IMAGES[cat.id].alt}
-                    width={800}
-                    height={600}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
-                  />
-                  <div
-                    className="absolute inset-0 bg-gradient-to-t from-forest-950/65 via-forest-950/5 to-transparent"
-                    aria-hidden="true"
-                  />
-                  <span
-                    className={`absolute left-4 top-4 flex h-9 w-9 items-center justify-center rounded-xl backdrop-blur ${
-                      active ? 'bg-lime-brand text-forest-950' : 'bg-cream-50/90 text-forest-800'
-                    }`}
-                  >
-                    <CatIcon className="h-4 w-4" aria-hidden="true" />
-                  </span>
-                  <span
-                    className={`absolute right-3 top-3 rounded-full px-2.5 py-1 text-[10px] font-bold backdrop-blur ${
-                      active ? 'bg-forest-950/70 text-lime-soft' : 'bg-cream-50/90 text-forest-800'
-                    }`}
-                  >
-                    {cat.items.length} alimentos
-                  </span>
-                </div>
-
-                <h3 className={`text-lg font-extrabold ${active ? 'text-cream-50' : 'text-forest-950'}`}>
-                  {cat.name}
-                </h3>
-                <p
-                  className={`mt-1 flex-1 text-xs leading-relaxed ${
-                    active ? 'text-cream-100/65' : 'text-muted'
+              <div key={cat.id} className="flex flex-col">
+                {/* Tarjeta de la categoría (con sus fotos grandes originales) */}
+                <button
+                  type="button"
+                  onClick={() => handleToggle(cat.id)}
+                  aria-expanded={active}
+                  className={`group relative flex w-full flex-col overflow-hidden rounded-[1.75rem] border p-5 text-left transition-all sm:p-6 ${
+                    active
+                      ? 'border-forest-900 bg-forest-900 text-cream-50 shadow-card ring-2 ring-lime-brand/70'
+                      : 'border-cream-200 bg-white hover:-translate-y-0.5 hover:border-forest-300 hover:shadow-[0_24px_50px_-32px_rgba(8,36,20,0.45)]'
                   }`}
                 >
-                  {cat.subtitle}
-                </p>
+                  <div className="relative -mx-5 -mt-5 mb-4 h-44 overflow-hidden sm:-mx-6 sm:-mt-6 sm:h-48">
+                    <img
+                      src={CATEGORY_IMAGES[cat.id].src}
+                      alt={CATEGORY_IMAGES[cat.id].alt}
+                      width={800}
+                      height={600}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
+                    />
+                    <div
+                      className="absolute inset-0 bg-gradient-to-t from-forest-950/65 via-forest-950/5 to-transparent"
+                      aria-hidden="true"
+                    />
+                    <span
+                      className={`absolute left-4 top-4 flex h-9 w-9 items-center justify-center rounded-xl backdrop-blur ${
+                        active ? 'bg-lime-brand text-forest-950 shadow-glow' : 'bg-cream-50/90 text-forest-800'
+                      }`}
+                    >
+                      <CatIcon className="h-4 w-4" aria-hidden="true" />
+                    </span>
+                    <span
+                      className={`absolute right-3 top-3 rounded-full px-2.5 py-1 text-[10px] font-bold backdrop-blur ${
+                        active ? 'bg-forest-950/70 text-lime-soft' : 'bg-cream-50/90 text-forest-800'
+                      }`}
+                    >
+                      {cat.items.length} alimentos
+                    </span>
+                  </div>
 
-                <div
-                  className={`mt-4 flex items-center justify-between border-t pt-3 text-[11px] font-bold ${
-                    active ? 'border-white/10 text-lime-brand' : 'border-cream-200 text-forest-700'
-                  }`}
-                >
-                  <span>{cat.macroFocus}</span>
-                  <ArrowUpRight
-                    className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                    aria-hidden="true"
-                  />
-                </div>
-              </button>
+                  <div className="flex items-center justify-between gap-2">
+                    <h3 className={`text-lg font-extrabold ${active ? 'text-cream-50' : 'text-forest-950'}`}>
+                      {cat.name}
+                    </h3>
+                    <span
+                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-transform duration-200 ${
+                        active
+                          ? 'rotate-180 bg-lime-brand text-forest-950'
+                          : 'bg-cream-100 text-forest-800 group-hover:bg-forest-900 group-hover:text-lime-brand'
+                      }`}
+                    >
+                      <ChevronDown className="h-4 w-4" aria-hidden="true" />
+                    </span>
+                  </div>
+
+                  <p
+                    className={`mt-1.5 flex-1 text-xs leading-relaxed ${
+                      active ? 'text-cream-100/65' : 'text-muted'
+                    }`}
+                  >
+                    {cat.subtitle}
+                  </p>
+                </button>
+
+                {/* SOLO EN CELULAR (md:hidden): Se abre INMEDIATAMENTE DEBAJO de la tarjeta tocada */}
+                {active && (
+                  <div className="mt-3 overflow-hidden rounded-[1.75rem] border border-cream-200 bg-white p-5 shadow-sm md:hidden">
+                    <div className="mb-3 flex items-center justify-between border-b border-cream-200 pb-2">
+                      <span className="text-[10px] font-extrabold uppercase text-forest-700">
+                        Alimentos destacados
+                      </span>
+                      <span className="rounded-full border border-forest-200 bg-lime-mist px-2.5 py-0.5 text-[9px] font-extrabold text-forest-800">
+                        {cat.macroFocus}
+                      </span>
+                    </div>
+
+                    <div className="grid gap-2.5 sm:grid-cols-2">
+                      {cat.items.map((food) => (
+                        <article
+                          key={food.name}
+                          className="rounded-2xl border border-cream-200 bg-cream-50 p-3.5 transition hover:bg-white"
+                        >
+                          <div className="flex items-start justify-between gap-2">
+                            <div>
+                              <h4 className="text-xs font-extrabold text-forest-950">{food.name}</h4>
+                              <p className="text-[10px] font-medium text-muted">{food.portion}</p>
+                            </div>
+                            <span className="rounded-md bg-forest-900 px-1.5 py-0.5 font-mono text-[9px] font-bold text-lime-brand">
+                              {food.calories}
+                            </span>
+                          </div>
+
+                          <div className="mt-2 grid grid-cols-3 gap-1">
+                            {[
+                              { label: 'Prot', value: food.protein },
+                              { label: 'Carb', value: food.carbs },
+                              { label: 'Grasa', value: food.fats }
+                            ].map((macro) => (
+                              <div
+                                key={macro.label}
+                                className="rounded-md border border-cream-200 bg-white p-1 text-center"
+                              >
+                                <span className="block text-[8px] font-bold uppercase text-sage-500">
+                                  {macro.label}
+                                </span>
+                                <span className="font-mono text-[10px] font-extrabold text-forest-950">
+                                  {macro.value}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+
+                          <p className="mt-2 flex items-center gap-1 text-[10px] font-semibold text-forest-700">
+                            <Star className="h-2.5 w-2.5 shrink-0 fill-lime-brand text-lime-brand" aria-hidden="true" />
+                            {food.tag}
+                          </p>
+                        </article>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             );
           })}
         </div>
 
-        {/* Active category detail */}
-        <div
-          id="categoria-detalle"
-          className="mt-5 scroll-mt-28 rounded-[2rem] border border-cream-200 bg-white p-6 shadow-[0_30px_70px_-45px_rgba(8,36,20,0.35)] sm:p-8"
-        >
-          <div className="flex flex-col gap-4 border-b border-cream-200 pb-5 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-3">
-              <img
-                src={selectedCategoryImage.src}
-                alt={selectedCategoryImage.alt}
-                width={120}
-                height={120}
-                className="h-14 w-14 shrink-0 rounded-2xl object-cover ring-1 ring-cream-200"
-              />
-              <div>
-                <span className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-forest-600">
-                  Enfoque macronutricional
+        {/* SOLO EN COMPUTADORA / TABLET (hidden md:block): Panel general de ancho completo elegante abajo de las 3 columnas */}
+        {selectedCategory && selectedCategoryImage && (
+          <div
+            id="categoria-detalle-desktop"
+            className="mt-6 hidden rounded-[2rem] border border-cream-200 bg-white p-6 shadow-[0_30px_70px_-45px_rgba(8,36,20,0.35)] sm:p-8 md:block"
+          >
+            <div className="flex items-center justify-between border-b border-cream-200 pb-5">
+              <div className="flex items-center gap-3">
+                <img
+                  src={selectedCategoryImage.src}
+                  alt={selectedCategoryImage.alt}
+                  width={120}
+                  height={120}
+                  className="h-14 w-14 shrink-0 rounded-2xl object-cover ring-1 ring-cream-200"
+                />
+                <div>
+                  <span className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-forest-600">
+                    Alimentos seleccionados
+                  </span>
+                  <h3 className="text-xl font-extrabold text-forest-950 sm:text-2xl">{selectedCategory.name}</h3>
+                  <p className="text-[11px] font-medium text-muted">{selectedCategory.subtitle}</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <span className="rounded-full border border-forest-200 bg-lime-mist px-3.5 py-1.5 text-[11px] font-extrabold text-forest-800">
+                  {selectedCategory.macroFocus}
                 </span>
-                <h3 className="text-xl font-extrabold text-forest-950 sm:text-2xl">{selectedCategory.name}</h3>
-                <p className="text-[11px] font-medium text-muted">{selectedCategory.subtitle}</p>
+                <button
+                  type="button"
+                  onClick={() => setActiveCategoryTab(null)}
+                  className="rounded-full bg-cream-100 px-3 py-1.5 text-xs font-bold text-forest-800 hover:bg-forest-900 hover:text-white"
+                >
+                  Cerrar
+                </button>
               </div>
             </div>
-            <span className="w-fit rounded-full border border-forest-200 bg-lime-mist px-3.5 py-1.5 text-[11px] font-extrabold text-forest-800">
-              {selectedCategory.macroFocus}
-            </span>
-          </div>
 
-          <div className="mt-5 grid gap-4 sm:grid-cols-2">
-            {selectedCategory.items.map((food) => (
-              <article
-                key={food.name}
-                className="rounded-2xl border border-cream-200 bg-cream-50 p-5 transition-all hover:border-forest-300 hover:bg-white"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <h4 className="text-sm font-extrabold text-forest-950">{food.name}</h4>
-                    <p className="mt-0.5 text-[11px] font-medium text-muted">Porción: {food.portion}</p>
-                  </div>
-                  <span className="shrink-0 rounded-lg bg-forest-900 px-2 py-1 font-mono text-[10px] font-bold text-lime-brand">
-                    {food.calories}
-                  </span>
-                </div>
-
-                <div className="mt-3 grid grid-cols-3 gap-2">
-                  {[
-                    { label: 'Prot', value: food.protein },
-                    { label: 'Carbos', value: food.carbs },
-                    { label: 'Grasas', value: food.fats }
-                  ].map((macro) => (
-                    <div
-                      key={macro.label}
-                      className="rounded-lg border border-cream-200 bg-white px-2 py-1.5 text-center"
-                    >
-                      <span className="block text-[9px] font-bold uppercase tracking-wider text-sage-500">
-                        {macro.label}
-                      </span>
-                      <span className="font-mono text-xs font-extrabold text-forest-950">{macro.value}</span>
+            <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {selectedCategory.items.map((food) => (
+                <article
+                  key={food.name}
+                  className="rounded-2xl border border-cream-200 bg-cream-50 p-4 transition-all hover:border-forest-300 hover:bg-white"
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <h4 className="text-xs font-extrabold text-forest-950">{food.name}</h4>
+                      <p className="mt-0.5 text-[10px] font-medium text-muted">Porción: {food.portion}</p>
                     </div>
-                  ))}
-                </div>
+                    <span className="shrink-0 rounded-md bg-forest-900 px-2 py-0.5 font-mono text-[10px] font-bold text-lime-brand">
+                      {food.calories}
+                    </span>
+                  </div>
 
-                <p className="mt-3 flex items-center gap-1.5 text-[11px] font-semibold text-forest-700">
-                  <Star className="h-3 w-3 shrink-0 fill-lime-brand text-lime-brand" aria-hidden="true" />
-                  {food.tag}
-                </p>
-              </article>
-            ))}
+                  <div className="mt-3 grid grid-cols-3 gap-1.5">
+                    {[
+                      { label: 'Prot', value: food.protein },
+                      { label: 'Carb', value: food.carbs },
+                      { label: 'Grasa', value: food.fats }
+                    ].map((macro) => (
+                      <div
+                        key={macro.label}
+                        className="rounded-lg border border-cream-200 bg-white p-1 text-center"
+                      >
+                        <span className="block text-[8px] font-bold uppercase text-sage-500">
+                          {macro.label}
+                        </span>
+                        <span className="font-mono text-[10px] font-extrabold text-forest-950">
+                          {macro.value}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <p className="mt-2.5 flex items-center gap-1 text-[10px] font-semibold text-forest-700">
+                    <Star className="h-3 w-3 shrink-0 fill-lime-brand text-lime-brand" aria-hidden="true" />
+                    {food.tag}
+                  </p>
+                </article>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );

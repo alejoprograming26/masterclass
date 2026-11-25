@@ -125,16 +125,16 @@ export const PAYMENT_METHODS: PaymentMethod[] = [
   },
   {
     id: 'transferencia',
-    name: 'Transferencia Bancaria / Pago Móvil',
+    name: 'Pago Móvil',
     badge: 'Moneda Local',
-    tagline: 'Coordinación local directa',
-    description: 'Para quienes prefieren operar a través de cuentas bancarias en moneda nacional o Pago Móvil.',
+    tagline: 'Acreditación inmediata en Bs.',
+    description: 'Para quienes prefieren operar en moneda nacional mediante Pago Móvil.',
     fields: [
       { label: 'Banco receptor', value: '[NOMBRE_DEL_BANCO]' },
-      { label: 'Titular y Cédula/RIF', value: '[TITULAR_Y_DOCUMENTO]' },
-      { label: 'Número de cuenta / Pago Móvil', value: '[NUMERO_CUENTA_O_TELEFONO]' }
+      { label: 'Cédula / Documento', value: '[TITULAR_Y_DOCUMENTO]' },
+      { label: 'Teléfono Pago Móvil', value: '[NUMERO_CUENTA_O_TELEFONO]' }
     ],
-    instructions: 'Una vez transferido, ingresa el código numérico de referencia en el formulario de inscripción.'
+    instructions: 'Una vez realizado el Pago Móvil, ingresa el número de referencia en el registro para validarlo.'
   }
 ];
 

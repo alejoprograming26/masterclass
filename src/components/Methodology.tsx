@@ -12,10 +12,6 @@ export function Methodology() {
             <h2 className="mt-4 max-w-xl text-3xl font-extrabold tracking-tight text-forest-950 sm:text-4xl">
               Cinco pasos para dejar de adivinar
             </h2>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
-              Una estructura pedagógica paso a paso para que salgas de la sesión aplicando tu plan el mismo día, con
-              total seguridad.
-            </p>
           </div>
           <a
             href="#registro"
@@ -94,14 +90,6 @@ export function Methodology() {
                       }`}
                     >
                       {item.subtitle}
-                    </p>
-
-                    <p
-                      className={`mt-3 text-sm leading-relaxed ${
-                        featured ? 'text-cream-100/70' : 'text-muted'
-                      }`}
-                    >
-                      {item.description}
                     </p>
 
                     <div

@@ -255,7 +255,7 @@ export function RegistrationForm() {
                         <option value="Binance Pay / USDT">Binance Pay / USDT</option>
                         <option value="Zelle">Zelle</option>
                         <option value="PayPal">PayPal</option>
-                        <option value="Transferencia / Pago Móvil">Transferencia / Pago Móvil</option>
+                        <option value="Pago Móvil">Pago Móvil</option>
                         <option value="Otro">Otro medio</option>
                       </select>
                     </div>
