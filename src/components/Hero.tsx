@@ -1,25 +1,13 @@
 import {
-  ArrowRight,
   Star,
   UtensilsCrossed,
   Beef,
   Wheat,
-  Nut,
-  CheckCircle2,
-  Scale,
-  Smartphone,
-  ShieldCheck
+  Nut
 } from 'lucide-react';
 import { Eyebrow } from './ui/Eyebrow';
 import heroPlato from '../assets/hero-plato.jpg';
 import heroDetalle from '../assets/hero-detalle.jpg';
-
-const HERO_BENEFITS = [
-  { icon: CheckCircle2, title: '100% ciencia aplicada', detail: 'Sin dietas milagro' },
-  { icon: Scale, title: 'Crudo vs. cocido', detail: 'Precisión real en báscula' },
-  { icon: Smartphone, title: 'MyFitnessPal', detail: 'Registro en menos de 4 min' },
-  { icon: ShieldCheck, title: 'Autonomía total', detail: 'Aprende una vez, para siempre' }
-];
 
 const AVATARS = ['MC', 'LR', 'JS', 'AP'];
 const AVATAR_STYLES = [
@@ -63,16 +51,6 @@ export function Hero() {
             <p className="mt-6 max-w-xl text-sm leading-relaxed text-cream-100/70 sm:text-base">
               Aprende a preparar tu plato para aumentar o perder peso
             </p>
-
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <a
-                href="#registro"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-lime-brand px-7 py-4 text-sm font-extrabold text-forest-950 shadow-glow transition-all hover:-translate-y-0.5 hover:bg-lime-soft"
-              >
-                Asegurar mi cupo
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </a>
-            </div>
 
             {/* Social proof */}
             <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
@@ -177,24 +155,6 @@ export function Hero() {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Trust strip */}
-        <div className="mt-12 grid grid-cols-2 gap-2 rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-3 backdrop-blur sm:gap-3 sm:p-4 lg:grid-cols-4">
-          {HERO_BENEFITS.map((benefit) => {
-            const Icon = benefit.icon;
-            return (
-              <div key={benefit.title} className="flex items-center gap-3 rounded-2xl p-2 sm:p-3">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-lime-brand/15 text-lime-brand">
-                  <Icon className="h-5 w-5" aria-hidden="true" />
-                </span>
-                <div>
-                  <p className="text-[11px] font-extrabold text-cream-50 sm:text-xs">{benefit.title}</p>
-                  <p className="mt-0.5 text-[10px] font-medium text-cream-100/60">{benefit.detail}</p>
-                </div>
-              </div>
-            );
-          })}
         </div>
       </div>
     </section>

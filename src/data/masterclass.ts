@@ -12,6 +12,12 @@ import {
 } from 'lucide-react';
 import type { ElementType } from 'react';
 
+export const NAV_LINKS = [
+  { href: '#metodologia', label: 'Qué aprenderás' },
+  { href: '#pagos', label: 'Pagos' },
+  { href: '#registro', label: 'Inscripción' }
+];
+
 export interface PaymentField {
   label: string;
   value: string;

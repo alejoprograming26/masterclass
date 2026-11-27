@@ -1,13 +1,6 @@
 import { useState } from 'react';
 import { Sprout, Calendar, Menu, X, ArrowUpRight, ArrowRight } from 'lucide-react';
-
-export const NAV_LINKS = [
-  { href: '#metodologia', label: 'Metodología' },
-  { href: '#alimentos', label: 'Alimentos' },
-  { href: '#objetivos', label: 'Objetivos' },
-  { href: '#pagos', label: 'Pagos' },
-  { href: '#registro', label: 'Inscripción' }
-];
+import { NAV_LINKS } from '../data/masterclass';
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -23,9 +16,7 @@ export function Navbar() {
             <span className="block text-[15px] font-extrabold leading-none tracking-tight sm:text-base">
               Gobierna tus macros
             </span>
-            <span className="mt-1 block text-[10px] font-semibold uppercase tracking-[0.16em] text-lime-brand/80">
-              Nutrición aplicada
-            </span>
+
           </span>
         </a>
 

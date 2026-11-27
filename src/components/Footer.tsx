@@ -1,5 +1,5 @@
 import { Sprout, Calendar } from 'lucide-react';
-import { NAV_LINKS } from './Navbar';
+import { NAV_LINKS } from '../data/masterclass';
 
 export function Footer() {
   return (
@@ -15,32 +15,19 @@ export function Footer() {
                 <span className="block text-base font-extrabold leading-none text-cream-50">
                   Gobierna tus macros
                 </span>
-                <span className="mt-1 block text-[10px] font-semibold uppercase tracking-[0.16em] text-lime-brand/80">
-                  Nutrición aplicada
-                </span>
+
               </span>
             </a>
             <p className="mt-4 max-w-sm text-xs leading-relaxed text-cream-100/55">
               Masterclass de nutrición aplicada para aprender a calcular tus macronutrientes y construir resultados
               sostenibles.
             </p>
-            <div className="mt-5 flex flex-wrap items-center gap-2 text-[10px] font-bold uppercase tracking-wider">
-              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-cream-100/60">
-                Instagram
-              </span>
-              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-cream-100/60">
-                YouTube
-              </span>
-              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-cream-100/60">
-                TikTok
-              </span>
-            </div>
           </div>
 
           <nav aria-label="Contenido">
             <h3 className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-lime-brand">Contenido</h3>
             <ul className="mt-4 space-y-2.5 text-xs font-semibold">
-              {NAV_LINKS.slice(0, 3).map((link) => (
+              {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <a href={link.href} className="transition-colors hover:text-lime-brand">
                     {link.label}
@@ -61,11 +48,6 @@ export function Footer() {
               <li>
                 <a href="#registro" className="transition-colors hover:text-lime-brand">
                   Registro
-                </a>
-              </li>
-              <li>
-                <a href="#objetivos" className="transition-colors hover:text-lime-brand">
-                  Objetivos
                 </a>
               </li>
             </ul>

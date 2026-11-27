@@ -4,7 +4,7 @@ import bannerPlato from '../assets/banner-plato.jpg';
 
 export function BrandBanner() {
   return (
-    <section className="bg-cream-100 pb-16 pt-4 sm:pb-20 sm:pt-6">
+    <section className="bg-cream-50 py-12 sm:py-16">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="relative overflow-hidden rounded-[2rem] bg-forest-900 p-7 text-cream-50 sm:rounded-[2.5rem] sm:p-10 lg:p-12">
           <div

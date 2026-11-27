@@ -2,8 +2,6 @@ import React, { useState, useId } from 'react';
 import {
   Calendar,
   CheckCircle2,
-  BadgeCheck,
-  Clock3,
   MessageCircle
 } from 'lucide-react';
 import { Eyebrow } from './ui/Eyebrow';
@@ -103,19 +101,6 @@ export function RegistrationForm() {
                     </li>
                   ))}
                 </ul>
-              </div>
-
-              <div className="mt-7 flex items-start gap-2.5 rounded-2xl border border-white/10 bg-white/5 p-4">
-                <BadgeCheck className="mt-0.5 h-5 w-5 shrink-0 text-lime-brand" aria-hidden="true" />
-                <p className="text-[11px] leading-relaxed text-cream-100/65">
-                  <strong className="font-extrabold text-cream-50">Plaza confirmada</strong> al validar tu pago y
-                  completar el registro.
-                </p>
-              </div>
-
-              <div className="mt-6 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-wider text-cream-100/60">
-                <Clock3 className="h-3.5 w-3.5" aria-hidden="true" />
-                <span>Acceso inmediato al aula virtual</span>
               </div>
             </div>
           </div>
@@ -291,7 +276,7 @@ export function RegistrationForm() {
                     <textarea
                       id={commentsId}
                       rows={2}
-                      placeholder="¿Tienes alguna duda sobre alimentos, báscula o la app?"
+                      placeholder="¿Tienes alguna duda sobre la masterclass, báscula o la app?"
                       value={formData.comments}
                       onChange={(e) => setFormData({ ...formData, comments: e.target.value })}
                       className={`${inputClass} resize-none`}
